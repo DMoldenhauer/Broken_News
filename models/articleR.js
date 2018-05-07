@@ -35,7 +35,7 @@ var ArticleRSchema = new Schema({
 });
 
 // This creates our model from the above schema, using mongoose's model method
-var ArticleR = mongoose.model("ArticleR", ArticleSchema);
+var ArticleR = mongoose.model("ArticleR", ArticleRSchema);
 
 // Export the Article model
 module.exports = ArticleR;

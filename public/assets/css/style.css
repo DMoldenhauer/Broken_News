@@ -67,6 +67,20 @@ background-size: cover;
     font-weight: bold;
 }
 
+#rightBar {
+    background-color: red;
+    color: white;
+    text-align: right;
+    font-size: x-large;
+    font-weight: bold;
+}
+
+#leftBar {
+    background-color: blue;
+    color: white;
+    font-size: x-large;
+    font-weight: bold;
+}
 
 .deleteArticle {
     background-color: red;

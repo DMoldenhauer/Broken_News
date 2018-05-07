@@ -9,14 +9,13 @@ var logger = require("morgan");
 var request = require("request");
 var path = require("path");
 
-// Our scraping tools
-// Axios is a promised-based http library, similar to jQuery's Ajax method
-// It works on the client and on the server
-// var axios = require("axios");
-// var cheerio = require("cheerio");
+
+
+
 
 // Require all models
 var db = require("./models");
+var ArticleRDB = require("./models/articleR.js");
 
 var PORT = process.env.PORT || 3000;
 
@@ -67,13 +66,33 @@ app.get("/", function (req, res) {
 
   db.Article.find({
 
-  }).then(function (data) {
-    var hbsObjext = {
-      articles: data
-    };
-    res.render('index', hbsObjext);
+  }).then(function (leftdata) {
+  
+
+
+    ArticleRDB.find({
+
+    }).then(function (data) {
+      var Rarticles = {
+        rightarticles: data,
+        leftarticles: leftdata
+      };
+      res.render('index', Rarticles);
+      console.log(hbsObjext);
+    })
+
+    
   });
+
+  console.log("db.ArticleR is: ", db.ArticleR);
+
+
 });
+
+
+
+
+
 
 app.put("/articles/:id", function (req, res) {
   db.Article.findOneAndUpdate({
@@ -102,13 +121,13 @@ app.delete("/articles/:id", function (req, res) {
 
 
 
-      // function(err,doc) {
-      //   if (err) { throw err; }
-      //   else { console.log("Updated isSaved to true"); }
-      // );
+    // function(err,doc) {
+    //   if (err) { throw err; }
+    //   else { console.log("Updated isSaved to true"); }
+    // );
 
 
-    ).then(function (data) {
+  ).then(function (data) {
     var hbsObjext = {
       articles: data
     };
