@@ -1,0 +1,110 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">Ron Burgundy's News Scraper</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="card" style="width: 100%">
+        <img class="card-img-top" src="../assets/img/ron-burgandy-broken-news.png" alt="Card image cap">
+        <div class="card-body">
+            <p class="card-text ronQuotes">The news is broken and that ain't right. But I'll help you fix it - Ron</p>
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-info learnMore" data-toggle="modal" data-target="#exampleModal">
+        Learn More About News Site Bias
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">News Site Bias</h5>
+                    <a href="https://www.makeuseof.com/tag/check-political-bias-media-site/ " target="_blank">Who came up with this chart?</a>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img class="card-img-top" src="../assets/img/newsiteschart.png" alt="Card image cap">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div id="main-container" class="container">
+        <!-- left column    -->
+        <div class="col-sm-6">
+            <div class="signs">
+                <a class="scrape-new" href="">
+                    <img src="../assets/img/left.png" alt="left arrow">
+                </a>
+            </div>
+
+            <div id="leftarticleContainer">
+                <ul class="list-group">
+                    <li class="list-group-item" id="leftBar">New York Times</li>
+                </ul>
+
+                <div class="loaderLeft">
+                    <!-- left spinner   -->
+                </div>
+
+                <div class="container-fluid article-container">
+                    <!-- insert NYT articles here    -->
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <!-- right column    -->
+        <div class="col-sm-6">
+            <div class="signs">
+                <a class="scrape-new-right" href="">
+                    <img src="../assets/img/right.png" alt="right arrow">
+                </a>
+            </div>
+
+            <div id="rightarticleContainer"></div>
+            <ul class="list-group">
+                <li class="list-group-item" id="rightBar">Fox News</li>
+            </ul>
+
+            <div class="loaderRight">
+                <!-- right spinner    -->
+            </div>
+            
+            <div class="container-fluid article-containerR">
+                <!-- insert Fox News articles here    -->
+            </div>
+            <hr>
+        </div>
+    </div>
+
+</div>
+
+<br>
+<br>
+
+<footer class="footer">
+    <div class="container">
+        <p>Ron's News Scraper</p>
+    </div>
+</footer>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="/assets/javascript/index.js"></script>
