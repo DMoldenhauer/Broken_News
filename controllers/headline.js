@@ -1,4 +1,4 @@
-// Controller for our headlines
+// Controller for NYT headlines
 // ============================
 var db = require("../models");
 
@@ -12,9 +12,9 @@ module.exports = {
         res.json(dbHeadline);
       });
   },
-  // Delete the specified headline
+  // Drop the collection
   delete: function(req, res) {
-    db.Headline.remove({ _id: req.params.id }).then(function(dbHeadline) {
+    db.Headline.remove().then(function(dbHeadline) {
       res.json(dbHeadline);
     });
   },

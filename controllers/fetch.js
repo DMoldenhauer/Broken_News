@@ -1,4 +1,4 @@
-// Controller for our scraper
+// Controller for NYT scraper
 // ============================
 var db = require("../models");
 var scrape = require("../scripts/scrape");

@@ -12,9 +12,9 @@ module.exports = {
         res.json(dbHeadlineR);
       });
   },
-  // Delete the specified headline
+  // Drop the collection
   delete: function(req, res) {
-    db.HeadlineR.remove({ _id: req.params.id }).then(function(dbHeadlineR) {
+    db.HeadlineR.remove().then(function(dbHeadlineR) {
       res.json(dbHeadlineR);
     });
   },

@@ -26,10 +26,10 @@ var scrapeR = function () {
         .text()
         .trim();
 
-      console.log("head is: " + head);
+      
       // Grab the URL of the article
       var url = "http://www.foxnews.com" + $(this).find("a").attr("href");
-      console.log("url is: " + url);
+      
 
       // Then we grab any children with the class of .dek and then grab it's inner text
       // We store this to the sum variable. This is the article summary
@@ -38,7 +38,7 @@ var scrapeR = function () {
         .children("a")
         .text()
         .trim();
-      console.log("sum is: " + sum);
+      
 
       // So long as our headline and sum and url aren't empty or undefined, do the following
       if (head && sum && url) {

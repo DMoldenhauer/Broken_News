@@ -1,4 +1,4 @@
-// Controller for our scraper
+// Controller for our Fox News scraper
 // ============================
 var db = require("../models");
 var scrapeR = require("../scripts/scrapeR");

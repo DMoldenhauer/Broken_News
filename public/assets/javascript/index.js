@@ -1,20 +1,13 @@
 /* global bootbox */
 
-function showRight() {
-  $(".loaderRight").show();
-}
 
-function showLeft() {
-  $(".loaderLeft").show();
-}
 
 $(document).ready(function () {
-  // Setting a reference to the article-container div where all the dynamic content will go
-  // Adding event listeners to any dynamically generated "save article"
-  // and "scrape new article" buttons
+  // Setting a reference to the article-container divs where all the dynamic content will go
   var articleContainer = $(".article-container");
   var articleContainerR = $(".article-containerR");
 
+  // Adding event listeners 
   $(document).on("click", ".btn.save", handleArticleSave);
   $(document).on("click", ".scrape-new", handleArticleScrape);
   $(document).on("click", ".scrape-new-right", handleArticleScrapeR);
@@ -23,33 +16,55 @@ $(document).ready(function () {
   initPage();
   initPageR();
 
+  function clearDB() {
+    // triggered when scrape occurs in order to get rid of old articles
+    $.ajax({
+      method: "DELETE",
+      url: "/api/headlines/"
+
+    }).then(function (result) {
+      console.log("headlines collection dropped")
+    });
+  }
+
+  function clearDBR() {
+    // triggered when scrape occurs in order to get rid of old articles
+    $.ajax({
+      method: "DELETE",
+      url: "/api/headlinesR/"
+
+    }).then(function (result) {
+      console.log("headliners collection dropped")
+    });
+  }
+
   function initPage() {
     // Empty the article container, run an AJAX request for any unsaved headlines
     articleContainer.empty();
-    $.get("/api/headlines?saved=false").then(function(data) {
+    $.get("/api/headlines?saved=false").then(function (data) {
       // If we have headlines, render them to the page
       if (data && data.length) {
         renderArticles(data);
       }
       else {
-    // Otherwise render a message explaining we have no articles
-    renderEmpty();
-    }
+        // Otherwise render a message explaining we have no articles
+        renderEmpty();
+      }
     });
   }
 
   function initPageR() {
     // Empty the article container, run an AJAX request for any unsaved headlines
     articleContainerR.empty();
-    $.get("/api/headlinesR?saved=false").then(function(data) {
+    $.get("/api/headlinesR?saved=false").then(function (data) {
       // If we have headlines, render them to the page
       if (data && data.length) {
         renderArticlesR(data);
       }
       else {
-    // Otherwise render a message explaining we have no articles
-    renderEmptyR();
-    }
+        // Otherwise render a message explaining we have no articles
+        renderEmptyR();
+      }
     });
   }
 
@@ -93,9 +108,6 @@ $(document).ready(function () {
         "<a class='article-link' target='_blank' href='" + article.url + "'>",
         article.headline,
         "</a>",
-        // "<a class='btn btn-success save'>",
-        // "Save Article",
-        // "</a>",
         "</h5>",
         "</div>",
         "<div class='card-body'>",
@@ -124,9 +136,6 @@ $(document).ready(function () {
         "<a class='article-link' target='_blank' href='" + article.url + "'>",
         article.headline,
         "</a>",
-        // "<a class='btn btn-success save'>",
-        // "Save Article",
-        // "</a>",
         "</h5>",
         "</div>",
         "<div class='card-body'>",
@@ -152,15 +161,6 @@ $(document).ready(function () {
         "<h3>No Articles Downloaded</h3>",
         "<h4>Click on arrow above to grab some news from \"the Left\".</h4>",
         "</div>",
-        // "<div class='card'>",
-        // "<div class='card-header text-center'>",
-        // "<h3>What Would You Like To Do?</h3>",
-        // "</div>",
-        // "<div class='card-body text-center'>",
-        // "<h4><a class='scrape-new'>Try Scraping New Articles</a></h4>",
-        // "<h4><a href='/saved'>Go to Saved Articles</a></h4>",
-        // "</div>",
-        // "</div>"
       ].join("")
     );
 
@@ -177,15 +177,6 @@ $(document).ready(function () {
         "<h3>No Articles Downloaded</h3>",
         "<h4>Click on arrow above to grab some news from \"the Right\".</h4>",
         "</div>",
-        // "<div class='card'>",
-        // "<div class='card-header text-center'>",
-        // "<h3>What Would You Like To Do?</h3>",
-        // "</div>",
-        // "<div class='card-body text-center'>",
-        // "<h4><a class='scrape-new'>Try Scraping New Articles</a></h4>",
-        // "<h4><a href='/saved'>Go to Saved Articles</a></h4>",
-        // "</div>",
-        // "</div>"
       ].join("")
     );
     // Appending this data to the page
@@ -214,9 +205,20 @@ $(document).ready(function () {
     });
   }
 
+  function showRight() {
+    //produces spinner to show scrape process is underway
+    $(".loaderRight").show();
+  }
+
+  function showLeft() {
+    //produces spinner to show scrape process is underway
+    $(".loaderLeft").show();
+  }
+
   function handleArticleScrape() {
     // This function handles the user clicking any "scrape new article" buttons
     event.preventDefault();
+    clearDB();
     showLeft();
     $.get("/api/fetch").then(function (data) {
       // If we are able to successfully scrape the NYTIMES and compare the articles to those
@@ -231,6 +233,7 @@ $(document).ready(function () {
   function handleArticleScrapeR() {
     // This function handles the user clicking any "scrape new article" buttons
     event.preventDefault();
+    clearDBR();
     showRight();
     $.get("/api/fetchR").then(function (data) {
       // If we are able to successfully scrape foxnews.com and compare the articles to those
